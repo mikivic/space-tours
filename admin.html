@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+   <html lang="ja">
+   <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Space Tours 管理者</title>
+     <link rel="stylesheet" href="styles.css">
+   </head>
+   <body>
+     <div class="container">
+       <h1>🚀 待ち時間更新</h1>
+       <form id="updateForm">
+         <label>パスワード: </label>
+         <input type="password" id="password" required><br><br>
+         <label>待ち時間（分）: </label>
+         <input type="number" id="waitTime" required><br><br>
+         <button type="submit">更新</button>
+       </form>
+       <p id="message"></p>
+       <a href="index.html">戻る</a>
+     </div>
+     <script>
+       document.getElementById('updateForm').addEventListener('submit', (e) => {
+         e.preventDefault();
+         const password = document.getElementById('password').value;
+         const waitTime = document.getElementById('waitTime').value;
+         if (password === 'spacetours2025') {
+           document.getElementById('message').textContent = '更新しました！（※GitHub Pagesでは手動でdata.jsonを更新してください）';
+           console.log(`新しい待ち時間: ${waitTime}分`); // 本番ではサーバーに送信
+         } else {
+           document.getElementById('message').textContent = 'パスワードが違います';
+         }
+       });
+     </script>
+   </body>
+   </html>
