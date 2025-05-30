@@ -1,67 +1,67 @@
 <!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Space Tours 管理者</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <div class="container">
-    <h1>🚀 管理者ページ</h1>
-    <p id="status" class="status"></p>
-    <form id="updateForm">
-      <label>パスワード: </label>
-      <input type="password" id="password" required><br><br>
-      <label>故障中: </label>
-      <input type="checkbox" id="isBroken"><br><br>
-      <button type="submit">更新</button>
-      <button type="button" onclick="resetGuests()">乗客リセット</button>
-    </form>
-    <p id="message"></p>
-    <a href="index.html">戻る</a>
-  </div>
-  <script>
-    let totalGuests = 0;
-    fetch('https://space-tours-1f95d-default-rtdb.asia-southeast1.firebasedatabase.app/status.json')
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById('status').textContent = data.isBroken ? '隕石に衝突しました。只今復旧作業中です。' : '';
-        document.getElementById('isBroken').checked = data.isBroken;
-        totalGuests = data.totalGuests || 0;
-      });
+   <html lang="ja">
+   <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+     <title>Space Tours 管理者</title>
+     <link rel="stylesheet" href="styles.css">
+   </head>
+   <body>
+     <div class="container">
+       <h1>🚀 管理者ページ</h1>
+       <p id="status" class="status"></p>
+       <form id="updateForm">
+         <label>パスワード: </label>
+         <input type="password" id="password" required><br><br>
+         <label>故障中: </label>
+         <input type="checkbox" id="isBroken"><br><br>
+         <button type="submit">更新</button>
+         <button type="button" onclick="resetGuests()">乗客リセット</button>
+       </form>
+       <p id="message"></p>
+       <a href="index.html">戻る</a>
+     </div>
+     <script>
+       let totalGuests = 0;
+       fetch('https://your-project-id.firebaseio.com/status.json')
+         .then(res => res.json())
+         .then(data => {
+           document.getElementById('status').textContent = data.isBroken ? '隕石に衝突しました。只今復旧作業中です。' : '';
+           document.getElementById('isBroken').checked = data.isBroken;
+           totalGuests = data.totalGuests || 0;
+         });
 
-    document.getElementById('updateForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const password = document.getElementById('password').value;
-      const isBroken = document.getElementById('isBroken').checked;
-      if (password === 'spacetours2025') {
-        fetch('https://space-tours-1f95d-default-rtdb.asia-southeast1.firebasedatabase.app/status.json', {
-          method: 'PUT',
-          body: JSON.stringify({ isBroken, totalGuests })
-        }).then(() => {
-          document.getElementById('message').textContent = '更新しました！';
-          document.getElementById('status').textContent = isBroken ? '隕石に衝突しました。只今復旧作業中です。' : '';
-        });
-      } else {
-        document.getElementById('message').textContent = 'パスワードが違います';
-      }
-    });
+       document.getElementById('updateForm').addEventListener('submit', (e) => {
+         e.preventDefault();
+         const password = document.getElementById('password').value;
+         const isBroken = document.getElementById('isBroken').checked;
+         if (password === 'spacetours2025') {
+           fetch('https://your-project-id.firebaseio.com/status.json', {
+             method: 'PUT',
+             body: JSON.stringify({ isBroken, totalGuests })
+           }).then(() => {
+             document.getElementById('message').textContent = '更新しました！';
+             document.getElementById('status').textContent = isBroken ? '隕石に衝突しました。只今復旧作業中です。' : '';
+           });
+         } else {
+           document.getElementById('message').textContent = 'パスワードが違います';
+         }
+       });
 
-    function resetGuests() {
-      const password = prompt('パスワードを入力してください');
-      if (password === 'spacetours2025') {
-        totalGuests = 0;
-        fetch('https://space-tours-1f95d-default-rtdb.asia-southeast1.firebasedatabase.app/status.json', {
-          method: 'PUT',
-          body: JSON.stringify({ isBroken: document.getElementById('isBroken').checked, totalGuests })
-        }).then(() => {
-          document.getElementById('message').textContent = '乗客数をリセットしました！';
-        });
-      } else {
-        document.getElementById('message').textContent = 'パスワードが違います';
-      }
-    }
-  </script>
-</body>
-</html>
+       function resetGuests() {
+         const password = prompt('パスワードを入力してください');
+         if (password === 'spacetours2025') {
+           totalGuests = 0;
+           fetch('https://your-project-id.firebaseio.com/status.json', {
+             method: 'PUT',
+             body: JSON.stringify({ isBroken: document.getElementById('isBroken').checked, totalGuests })
+           }).then(() => {
+             document.getElementById('message').textContent = '乗客数をリセットしました！';
+           });
+         } else {
+           document.getElementById('message').textContent = 'パスワードが違います';
+         }
+       }
+     </script>
+   </body>
+   </html>
