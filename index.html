@@ -1,23 +1,42 @@
 <!DOCTYPE html>
-   <html lang="ja">
-   <head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Space Tours 待ち時間</title>
-     <link rel="stylesheet" href="styles.css">
-     <script src="assets/p5.min.js"></script>
-     <script src="script.js"></script>
-   </head>
-   <body>
-     <div class="container">
-       <h1>🚀 Space Tours 待ち時間</h1>
-       <p id="wait-time">読み込み中...</p>
-       <p id="trivia">宇宙トリビア: 読み込み中...</p>
-       <h2>ミニゲーム: 隕石よけ</h2>
-       <p>←/→キーで宇宙船を動かして隕石を避けよう！</p>
-       <div id="game"></div>
-       <a href="admin.html">管理者用ページ</a>
-     </div>
-   </body>
-   </html>
-   
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Space Tours</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="assets/p5.min.js"></script>
+  <script src="script.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div id="broken" class="broken hidden">
+      <h1>隕石に衝突しました。</h1>
+      <h2>只今復旧作業中です。</h2>
+    </div>
+    <div id="guest-input" class="guest-input">
+      <h2>何人のご搭乗ですか？</h2>
+      <input type="number" id="guest-count" min="1" required>
+      <button onclick="submitGuests()">送信</button>
+    </div>
+    <div id="game-container" class="hidden">
+      <h1>🚀 Space Tours</h1>
+      <p id="wait-time"></p>
+      <h2>ミニゲームを選択</h2>
+      <button onclick="startQuiz()">宇宙検定</button>
+      <button onclick="startBuilder()">スターライン・ビルダー</button>
+      <div id="game"></div>
+      <div id="quiz-result" class="hidden">
+        <p id="quiz-score"></p>
+        <p id="quiz-rank"></p>
+        <button onclick="restartQuiz()">もう一度</button>
+      </div>
+      <div id="builder-result" class="hidden">
+        <p id="builder-message"></p>
+        <button onclick="restartBuilder()">もう一度</button>
+      </div>
+      <a href="admin.html">管理者ページ</a>
+    </div>
+  </div>
+</body>
+</html>
